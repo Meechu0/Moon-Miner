@@ -24,7 +24,13 @@ public class RoverMovement : MonoBehaviour
     private Image batteryFillImage; // battery charge ui image
     void Update()
     {
-        if(batteryCharge > 0)
+        //refill battery (for testing)
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            FillBattery();
+        }
+
+        if (batteryCharge > 0)
         {
             processInputs();
         }
@@ -76,12 +82,6 @@ public class RoverMovement : MonoBehaviour
         transform.Translate(Vector3.forward * moveDistance);
         transform.Rotate(Vector3.up * rotationAngle);
 
-        //refill battery (for testing)
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            FillBattery();
-        }
-
         //update ui image
         UpdateBatteryFill();
 
@@ -100,5 +100,6 @@ public class RoverMovement : MonoBehaviour
     private void FillBattery()
     {
         batteryCharge = 10f;
+        isMoving = true;
     }
 }

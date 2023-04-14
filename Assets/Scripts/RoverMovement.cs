@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class RoverMovement : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class RoverMovement : MonoBehaviour
     [SerializeField]
     private float turnSpeed;
 
+    public int maxNumberOfBatteries;
+    public int numberOfBatteries;
+    public TextMeshProUGUI BatteryCountText;
+
     [SerializeField]
     private float batteryCharge; // battery charge in seconds
     [SerializeField]
@@ -21,6 +26,11 @@ public class RoverMovement : MonoBehaviour
 
     public float horizontalInput;
     public float verticalInput;
+    private void Start()
+    {
+        numberOfBatteries = maxNumberOfBatteries;
+        BatteryCountText.text = numberOfBatteries.ToString();
+    }
 
     [SerializeField]
     private Image batteryFillImage; // battery charge ui image
@@ -31,6 +41,8 @@ public class RoverMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             FillBattery();
+            numberOfBatteries += 1;
+            BatteryCountText.text = numberOfBatteries.ToString();
         }
 
         if (batteryCharge > 0)
@@ -71,23 +83,32 @@ public class RoverMovement : MonoBehaviour
 
             // decrease battery when moving
             batteryCharge -= Time.deltaTime;
-            if (batteryCharge <= 0f)
+
+            if (numberOfBatteries > 0)
+            {
+                if (batteryCharge <= 0f)
+                {
+
+                    batteryCharge = 10f;
+                    numberOfBatteries -= 1;
+                    BatteryCountText.text = numberOfBatteries.ToString();
+
+                }
+            }
+            else
             {
                 batteryCharge = 0f;
                 isMoving = false; // stop moving when battery is used
+                moveDistance = 0f;
             }
+
+
+            transform.Translate(Vector3.forward * moveDistance);
+            transform.Rotate(Vector3.up * rotationAngle);
+
+            //update ui image
+            UpdateBatteryFill();
         }
-        else
-        {
-            moveDistance = 0f;
-        }
-
-        transform.Translate(Vector3.forward * moveDistance);
-        transform.Rotate(Vector3.up * rotationAngle);
-
-        //update ui image
-        UpdateBatteryFill();
-
     }
 
     private void UpdateBatteryFill()

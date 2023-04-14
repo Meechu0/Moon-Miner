@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Minigame
 {
@@ -7,13 +8,20 @@ namespace Minigame
         [SerializeField] private Transform canvas;
         [SerializeField] private GameObject minigamePrefab;
 
+        private GameObject _minigameInstance;
         private bool _encounterStarted;
 
         private void OnTriggerEnter(Collider other)
         {
             if (_encounterStarted) return;
             _encounterStarted = true;
-           Instantiate(minigamePrefab, canvas);
+           _minigameInstance = Instantiate(minigamePrefab, canvas);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            _encounterStarted = false;
+            Destroy(_minigameInstance);
         }
     }
 }

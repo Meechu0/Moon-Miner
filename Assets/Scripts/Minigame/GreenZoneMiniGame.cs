@@ -1,10 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Minigame
 {
     public class GreenZoneMiniGame : MonoBehaviour
     {
+        [Header("Game End Text")] 
+        [SerializeField] private GameObject successText;
+        [SerializeField] private GameObject failText;
+        
         [Header("Arrow Setup")]
         [SerializeField] private RectTransform arrowTransform;
         [SerializeField] private float smoothTime;
@@ -15,12 +20,16 @@ namespace Minigame
         private float _arrowPosY;
         private float _currentVel;
         private bool _stop;
+        private bool _gameFinished;
 
         private void Awake()
         {
             _redBar = GetComponent<RectTransform>();
             _redRange = _redBar.rect.size.y / 2f;
+        }
 
+        private void Start()
+        {
             GenerateGreenZones();
         }
 
@@ -29,7 +38,14 @@ namespace Minigame
             if (Input.GetKeyDown(KeyCode.Space)) _stop = true;
         
             if(!_stop) MoveArrow();
-            if(_stop) Debug.Log(PassFail());
+            if (_stop && !_gameFinished)
+            {
+                _gameFinished = true;
+                var pass = PassFail();
+                if(pass) Instantiate(successText, transform);
+                else Instantiate(failText, transform);
+                Destroy(gameObject, 2f);
+            }
         }
 
         private void MoveArrow()
@@ -51,7 +67,7 @@ namespace Minigame
                     _arrowPosY > greenZone.localPosition.y - greenZone.rect.size.y / 2)
                     hasPassed = true;
             }
-
+            
             return hasPassed;
         }
     
@@ -78,8 +94,6 @@ namespace Minigame
                 zoneRect.localPosition = new Vector2(0, Random.Range(-_redRange + maxSize, _redRange - maxSize));
                 _greenZones.Add(zoneRect);
             }
-            
-            Destroy(gameObject, 2f);
         }
     }
 }

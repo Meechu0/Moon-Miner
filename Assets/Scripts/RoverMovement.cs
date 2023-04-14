@@ -26,8 +26,6 @@ public class RoverMovement : MonoBehaviour
     private Image batteryFillImage; // battery charge ui image
     void Update()
     {
-        Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, Mathf.Infinity, ground);
-        transform.up = hit.normal;
         
         //refill battery (for testing)
         if (Input.GetKeyDown(KeyCode.Q))

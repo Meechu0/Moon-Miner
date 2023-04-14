@@ -472,6 +472,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8cc9e4070d02242afcef091e3f3213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldValueMin: 1
+  goldValueMax: 50
+  resourceValueMin: 1
+  resourseValueMax: 50
   successText: {fileID: 4767002423487183525, guid: 6ecd4f51ea3a7e149a9307c409a3229e, type: 3}
   failText: {fileID: 8050931122898987515, guid: 12258be9657428d498eab243bfeb9072, type: 3}
   arrowTransform: {fileID: 3344327381605187524}

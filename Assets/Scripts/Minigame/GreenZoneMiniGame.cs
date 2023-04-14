@@ -6,6 +6,11 @@ namespace Minigame
 {
     public class GreenZoneMiniGame : MonoBehaviour
     {
+        [SerializeField] private int goldValueMin;
+        [SerializeField] private int goldValueMax;
+        [SerializeField] private int resourceValueMin;
+        [SerializeField] private int resourseValueMax;
+        
         [Header("Game End Text")] 
         [SerializeField] private GameObject successText;
         [SerializeField] private GameObject failText;
@@ -15,6 +20,7 @@ namespace Minigame
         [SerializeField] private float smoothTime;
         [SerializeField] private float maxSpeed;
 
+        private PlayerResources _playerResources;
         private RectTransform _redBar;
         private float _redRange;
         private float _arrowPosY;
@@ -24,6 +30,7 @@ namespace Minigame
 
         private void Awake()
         {
+            _playerResources = FindObjectOfType<PlayerResources>();
             _redBar = GetComponent<RectTransform>();
             _redRange = _redBar.rect.size.y / 2f;
         }
@@ -35,7 +42,7 @@ namespace Minigame
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) _stop = true;
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) _stop = true;
         
             if(!_stop) MoveArrow();
             if (_stop && !_gameFinished)
@@ -65,7 +72,13 @@ namespace Minigame
             {
                 if (_arrowPosY < greenZone.localPosition.y + greenZone.rect.size.y / 2 &&
                     _arrowPosY > greenZone.localPosition.y - greenZone.rect.size.y / 2)
+                {
                     hasPassed = true;
+                    _playerResources.AddGold(Random.Range(goldValueMin, goldValueMax));
+                    _playerResources.AddResource(Random.Range(resourceValueMin, resourseValueMax));
+                    break;
+                }
+
             }
             
             return hasPassed;

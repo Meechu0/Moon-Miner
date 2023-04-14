@@ -84,4 +84,13 @@ public class PlayerResources : MonoBehaviour
         }
         Destroy(text.gameObject);
     }
+
+    public void updateValuebles()
+    {
+        gold = 0;
+        resource = 0;
+        resourceText.text = "Resource: " + gold.ToString();
+        GoldText.text = "gold: " + gold.ToString();
+
+    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoverMovement : MonoBehaviour
 {
@@ -11,31 +12,93 @@ public class RoverMovement : MonoBehaviour
     [SerializeField]
     private float turnSpeed;
 
-    // Update is called once per frame
+    [SerializeField]
+    private float batteryCharge; // battery charge in seconds
+    [SerializeField]
+    private bool isMoving; // bool for movement
+
+    public float horizontalInput;
+    public float verticalInput;
+
+    [SerializeField]
+    private Image batteryFillImage; // battery charge ui image
     void Update()
     {
-        Move();
+        if(batteryCharge > 0)
+        {
+            processInputs();
+        }
     }
 
-    private void Move()
+    private void processInputs()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+
+        if (verticalInput > 0)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
 
         bool isBoosting = Input.GetKey(KeyCode.LeftShift);
 
         float moveDistance;
         float rotationAngle = turnSpeed * Time.deltaTime * horizontalInput;
-        if (isBoosting)
+
+        if (isMoving) // check if player is moving
         {
-            moveDistance = boostedMoveSpeed * Time.deltaTime * verticalInput;
+            if (isBoosting)
+            {
+                moveDistance = boostedMoveSpeed * Time.deltaTime * verticalInput;
+            }
+            else
+            {
+                moveDistance = moveSpeed * Time.deltaTime * verticalInput;
+            }
+
+            // decrease battery when moving
+            batteryCharge -= Time.deltaTime;
+            if (batteryCharge <= 0f)
+            {
+                batteryCharge = 0f;
+                isMoving = false; // stop moving when battery is used
+            }
         }
         else
         {
-            moveDistance = moveSpeed * Time.deltaTime * verticalInput;
+            moveDistance = 0f;
         }
 
         transform.Translate(Vector3.forward * moveDistance);
         transform.Rotate(Vector3.up * rotationAngle);
+
+        //refill battery (for testing)
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            FillBattery();
+        }
+
+        //update ui image
+        UpdateBatteryFill();
+
+    }
+
+    private void UpdateBatteryFill()
+    {
+        // update battery image based on charge
+        if (batteryFillImage != null)
+        {
+            float fillAmount = batteryCharge / 10f; 
+            batteryFillImage.fillAmount = fillAmount;
+        }
+    }
+
+    private void FillBattery()
+    {
+        batteryCharge = 10f;
     }
 }

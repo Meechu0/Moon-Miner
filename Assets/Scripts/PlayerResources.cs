@@ -18,12 +18,7 @@ public class PlayerResources : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            int amount = Random.Range(1, 11);
-            AddGold(amount);
-            Debug.Log("earned" + amount + "Gold");
-        }
+
     }
     //add gold function 
     public void AddGold(int amount)
@@ -49,6 +44,20 @@ public class PlayerResources : MonoBehaviour
     public void AddResource(int amount)
     {
         resource += amount;
+        resourceText.text = "Resource: " + gold.ToString();
+        // spawn text object above players head
+        if (goldTextPrefab != null)
+        {
+            // text position, text rotation
+            Vector3 textPosition = transform.position + Vector3.up * 2f;
+            Quaternion textRotation = Quaternion.identity;
+            // spawn text object
+            TextMeshPro text = Instantiate(resourceTextPrefab, textPosition, textRotation);
+            // replace text with amount recieved
+            text.text = "+" + amount + " Resource";
+            // start fade anim
+            StartCoroutine(MoveAndFadeText(text));
+        }
     }
 
     // courutine for text animation

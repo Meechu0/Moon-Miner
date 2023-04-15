@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     void processCamera()
     {
         Vector3 cameraTargetPosition = target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, cameraTargetPosition,Time.deltaTime); // move camera towards cameraTargetPosition
+        transform.position = Vector3.Lerp(transform.position, cameraTargetPosition, Time.deltaTime); // move camera towards cameraTargetPosition
 
         // camera zoom - mouse scrollwheel
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
@@ -34,6 +34,8 @@ public class CameraController : MonoBehaviour
         // camera position based on zoom distance
         transform.position = target.position - transform.forward * currentZoomDistance;
 
+        //clamp camera's y position
+        transform.position = new Vector3(transform.position.x, Mathf.Max(transform.position.y, 2.8f), transform.position.z);
 
         if (Input.GetMouseButton(1)) // rotate camera using right click
         {

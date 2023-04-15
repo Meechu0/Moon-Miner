@@ -8,6 +8,10 @@ namespace Minigame
 {
     public class InputMinigame : MonoBehaviour
     {
+        [SerializeField] private int minGold;
+        [SerializeField] private int maxGold;
+        [SerializeField] private int minResources;
+        [SerializeField] private int maxResources;
         [SerializeField] private float timeLimit;
         [SerializeField] private Image timer;
         [SerializeField] private GameObject inputPrefab;
@@ -21,9 +25,12 @@ namespace Minigame
 
         private List<GameObject> _inputs;
         private float _remainingTimeLimit;
+        private PlayerResources _playerResources;
+        private bool gameFinished;
 
         private void Awake()
         {
+            _playerResources = FindObjectOfType<PlayerResources>();
             _remainingTimeLimit = timeLimit;
         }
 
@@ -34,8 +41,11 @@ namespace Minigame
 
         private void Update()
         {
-            if (_inputs.Count == 0)
+            if (_inputs.Count == 0 && !gameFinished)
             {
+                gameFinished = true;
+                _playerResources.AddGold(Random.Range(minGold, maxGold));
+                _playerResources.AddResource(Random.Range(minResources, maxResources));
                 passText.SetActive(true);
                 Destroy(gameObject, 2f);
                 return;

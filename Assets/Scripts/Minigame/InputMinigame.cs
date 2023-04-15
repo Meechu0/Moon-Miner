@@ -41,7 +41,8 @@ namespace Minigame
 
         private void Update()
         {
-            if (_inputs.Count == 0 && !gameFinished)
+            if (gameFinished) return;
+            if (_inputs.Count == 0)
             {
                 gameFinished = true;
                 _playerResources.AddGold(Random.Range(minGold, maxGold));

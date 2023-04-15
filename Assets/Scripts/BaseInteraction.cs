@@ -7,6 +7,7 @@ using TMPro;
 public class BaseInteraction : MonoBehaviour
 {
     public PlayerResources _PlayerResources;
+    public RoverMovement _RoverMovementScript;
     public GameObject uiPanel;
     public GameObject tabPanel;
     public GameObject shopPanel;
@@ -46,7 +47,10 @@ public class BaseInteraction : MonoBehaviour
         {
             Debug.Log("entered base");
             isCollidingWithBase = true;
-            
+            _RoverMovementScript.numberOfBatteries = _RoverMovementScript.maxNumberOfBatteries;
+            _RoverMovementScript.batteryCharge = 10f;
+
+
         }
     }
     private void OnTriggerExit(Collider other)
@@ -55,6 +59,9 @@ public class BaseInteraction : MonoBehaviour
         {
             print("left base");
             isCollidingWithBase = false;
+            _RoverMovementScript.numberOfBatteries = _RoverMovementScript.maxNumberOfBatteries;
+            _RoverMovementScript.batteryCharge = 10f;
+
             if (uiPanel.activeSelf)
             {
                 uiPanel.SetActive(false);

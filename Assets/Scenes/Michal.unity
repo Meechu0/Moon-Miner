@@ -3726,8 +3726,8 @@ MonoBehaviour:
   moveSpeed: 12
   boostedMoveSpeed: 25
   turnSpeed: 155
-  maxNumberOfBatteries: 3
-  numberOfBatteries: 2
+  maxNumberOfBatteries: 1
+  numberOfBatteries: 1
   BatteryCountText: {fileID: 1665510081}
   batteryCharge: 10
   isMoving: 0
@@ -3830,6 +3830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PlayerResources: {fileID: 1091958830}
+  _RoverMovementScript: {fileID: 1091958824}
   uiPanel: {fileID: 649374694}
   tabPanel: {fileID: 1824468486}
   shopPanel: {fileID: 214779633}

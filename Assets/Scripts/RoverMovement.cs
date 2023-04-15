@@ -20,7 +20,7 @@ public class RoverMovement : MonoBehaviour
     public TextMeshProUGUI BatteryCountText;
 
     [SerializeField]
-    private float batteryCharge; // battery charge in seconds
+    public float batteryCharge; // battery charge in seconds
     [SerializeField]
     private bool isMoving; // bool for movement
 

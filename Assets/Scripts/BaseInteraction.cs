@@ -9,15 +9,17 @@ public class BaseInteraction : MonoBehaviour
     public PlayerResources _PlayerResources;
     public GameObject uiPanel;
     public GameObject tabPanel;
+    public GameObject shopPanel;
     public int gold;
     public int resources;
     private bool isCollidingWithBase; 
     // Update is called once per frame
     void Update()
     {
-        if(isCollidingWithBase && !uiPanel.activeSelf)
+        if(isCollidingWithBase && !uiPanel.activeSelf && !shopPanel.activeSelf)
         {
             tabPanel.SetActive(true);
+            updateText();
         }
         else
         {
@@ -32,6 +34,7 @@ public class BaseInteraction : MonoBehaviour
             }else
             {
                 uiPanel.SetActive(true);
+                updateText();
                 tabPanel.SetActive(false);
             }
         }
@@ -42,7 +45,8 @@ public class BaseInteraction : MonoBehaviour
         if (other.CompareTag("Base"))
         {
             Debug.Log("entered base");
-            isCollidingWithBase = true; 
+            isCollidingWithBase = true;
+            
         }
     }
     private void OnTriggerExit(Collider other)
@@ -50,7 +54,17 @@ public class BaseInteraction : MonoBehaviour
         if (other.CompareTag("Base"))
         {
             print("left base");
-            isCollidingWithBase = false; 
+            isCollidingWithBase = false;
+            if (uiPanel.activeSelf)
+            {
+                uiPanel.SetActive(false);
+            }
+            if (shopPanel.activeSelf)
+            {
+                shopPanel.SetActive(false);
+            }
+
+
         }
     }
 
@@ -60,8 +74,24 @@ public class BaseInteraction : MonoBehaviour
     {
         gold += _PlayerResources.gold;
         resources += _PlayerResources.resource;
-        resourcesText.text = "Resources: " + resources.ToString();
-        goldText.text = "Gold: " + gold.ToString();
+        updateText();
         _PlayerResources.updateValuebles();
     }
+
+    public void updateText()
+    {
+        resourcesText.text = "Resources: " + resources.ToString();
+        goldText.text = "Gold: " + gold.ToString();
+    }
+
+    public void openShop()
+    {
+        shopPanel.SetActive(true);
+        if (uiPanel.activeSelf)
+        {
+            uiPanel.SetActive(false);
+        }
+
+    }
+
 }

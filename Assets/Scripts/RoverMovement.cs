@@ -26,6 +26,9 @@ public class RoverMovement : MonoBehaviour
 
     public float horizontalInput;
     public float verticalInput;
+
+    //satelite
+    private SateliteInteraction _sateliteScript;
     private void Start()
     {
         numberOfBatteries = maxNumberOfBatteries;
@@ -48,6 +51,19 @@ public class RoverMovement : MonoBehaviour
         if (batteryCharge > 0)
         {
             processInputs();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if(_sateliteScript != null && Vector3.Distance(transform.position, _sateliteScript.transform.position) < 20F)
+            {
+                _sateliteScript.Interact();
+                Debug.Log("interacted with satelite");
+            }
+            else
+            {
+                Debug.Log("interaction failed");
+            }
         }
     }
 
@@ -126,4 +142,21 @@ public class RoverMovement : MonoBehaviour
         batteryCharge = 10f;
         isMoving = true;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Satelite"))
+        {
+            _sateliteScript = other.GetComponent<SateliteInteraction>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Satelite"))
+        {
+            _sateliteScript = null;
+        }
+    }
+
 }

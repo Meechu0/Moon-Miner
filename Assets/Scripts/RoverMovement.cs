@@ -29,6 +29,8 @@ public class RoverMovement : MonoBehaviour
 
     //satelite
     private SateliteInteraction _sateliteScript;
+    //return interaction point
+    public ReturnPointInteraction _returnPoint;
     private void Start()
     {
         numberOfBatteries = maxNumberOfBatteries;
@@ -62,7 +64,13 @@ public class RoverMovement : MonoBehaviour
             }
             else
             {
-                Debug.Log("interaction failed");
+                //Debug.Log("interaction failed");
+            }
+
+            if (_returnPoint != null && Vector3.Distance(transform.position, _returnPoint.transform.position) < 20f)
+            {
+                _returnPoint.Interact();
+                Debug.Log("interacted with return point");
             }
         }
     }

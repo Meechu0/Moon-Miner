@@ -46,7 +46,7 @@ public class ShopManager : MonoBehaviour
         if (_BaseInteractionScript.copper >= chargerCost)
         {
             chargerPlacer.BuyCharger();
-            _BaseInteractionScript.copper -= BatteryUpgradeCost;
+            _BaseInteractionScript.copper -= chargerCost;
             _BaseInteractionScript.updateText();
         }
     }

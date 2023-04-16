@@ -2403,9 +2403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7dce2d16057194abf0a4351e13e732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargerCost: 20
-  BatteryUpgradesAvailable: 2
-  BatteryUpgradeCost: 15
+  chargerCost: 15
+  BatteryUpgradesAvailable: 4
+  BatteryUpgradeCost: 10
   _RoverMovementScript: {fileID: 1091958824}
   _BaseInteractionScript: {fileID: 1091958829}
   batteryStockText: {fileID: 1255880889}
@@ -8909,15 +8909,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091958823}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2582283, y: 2.19, z: -19.55}
+  m_LocalRotation: {x: -0, y: -0.12447743, z: -0, w: 0.9922224}
+  m_LocalPosition: {x: 22.77, y: 0.38, z: 12.55}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 765038911}
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -14.301, z: 0}
 --- !u!114 &1091958829
 MonoBehaviour:
   m_ObjectHideFlags: 0

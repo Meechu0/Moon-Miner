@@ -8,6 +8,7 @@ namespace Minigame
 {
     public class InputMinigame : MonoBehaviour
     {
+        public GameObject encounter;
         [SerializeField] private int minGold;
         [SerializeField] private int maxGold;
         [SerializeField] private int minResources;
@@ -50,6 +51,7 @@ namespace Minigame
                 _playerResources.AddGold(Random.Range(minGold, maxGold));
                 _playerResources.AddResource(Random.Range(minResources, maxResources));
                 passText.SetActive(true);
+                Destroy(encounter);
                 Destroy(gameObject, 2f);
                 _roverMovement.enabled = true;
                 return;
@@ -57,6 +59,7 @@ namespace Minigame
             if (_remainingTimeLimit <= 0)
             {
                 failText.SetActive(true);
+                Destroy(encounter);
                 Destroy(gameObject, 2f);
                 _roverMovement.enabled = true;
                 return;

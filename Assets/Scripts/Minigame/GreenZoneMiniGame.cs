@@ -6,6 +6,7 @@ namespace Minigame
 {
     public class GreenZoneMiniGame : MonoBehaviour
     {
+        public GameObject encounter;
         [SerializeField] private int goldValueMin;
         [SerializeField] private int goldValueMax;
         [SerializeField] private int resourceValueMin;
@@ -63,7 +64,8 @@ namespace Minigame
                 var pass = PassFail();
                 if(pass) Instantiate(successText, transform);
                 else Instantiate(failText, transform);
-
+                
+                Destroy(encounter);
                 Destroy(gameObject, 2f);
             }
         }

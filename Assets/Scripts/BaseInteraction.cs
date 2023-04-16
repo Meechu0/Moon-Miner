@@ -113,6 +113,8 @@ public class BaseInteraction : MonoBehaviour
 
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI resourcesText;
+    public TextMeshProUGUI goldTextShop;
+    public TextMeshProUGUI resourcesTextShop;
     public void TransferResourcesToBase()
     {
         copper += _PlayerResources.gold;
@@ -123,13 +125,16 @@ public class BaseInteraction : MonoBehaviour
 
     public void updateText()
     {
-        resourcesText.text = "Resources: " + resources.ToString();
-        goldText.text = "Gold: " + copper.ToString();
+        resourcesText.text = "Lithium: " + resources.ToString();
+        resourcesTextShop.text = "Lithium: " + resources.ToString();
+        goldText.text = "Copper: " + copper.ToString();
+        goldTextShop.text = "Copper: " + copper.ToString();
     }
 
     public void openShop()
     {
         shopPanel.SetActive(true);
+        updateText();
         if (uiPanel.activeSelf)
         {
             uiPanel.SetActive(false);

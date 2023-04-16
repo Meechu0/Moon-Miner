@@ -16,6 +16,11 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI batteryStockText;
     private ChargerPlacer chargerPlacer;
 
+    public GameObject shopPanel;
+    public GameObject BasePanel;
+    public GameObject Panel;
+
+
     private void Awake()
     {
         chargerPlacer = FindObjectOfType<ChargerPlacer>();
@@ -49,5 +54,22 @@ public class ShopManager : MonoBehaviour
             _BaseInteractionScript.copper -= chargerCost;
             _BaseInteractionScript.updateText();
         }
+    }
+
+    public void ExitPanels()
+    {
+        if (shopPanel.activeSelf)
+        {
+            shopPanel.SetActive(false);
+        }
+        if(BasePanel.activeSelf)
+        {
+            BasePanel.SetActive(false);
+        }
+        if (!Panel.activeSelf)
+        {
+            Panel.SetActive(true);
+        }
+
     }
 }

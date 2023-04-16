@@ -483,10 +483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd257a6bf2a34a149b61df941a3afc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  encounter: {fileID: 0}
   minGold: 0
   maxGold: 0
-  minResources: 10
-  maxResources: 25
+  minResources: 5
+  maxResources: 15
   timeLimit: 10
   timer: {fileID: 2930348628371674626}
   inputPrefab: {fileID: 8198633837174627178, guid: 1176c65d5b981bb439f2cf41a1befe34, type: 3}
@@ -494,7 +495,7 @@ MonoBehaviour:
   passText: {fileID: 7677929277345631654}
   failText: {fileID: 5120618882514888849}
   minInputs: 6
-  maxInputs: 27
+  maxInputs: 12
 --- !u!1 &2930348628371674624
 GameObject:
   m_ObjectHideFlags: 0

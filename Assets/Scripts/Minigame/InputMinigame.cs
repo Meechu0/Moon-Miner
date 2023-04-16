@@ -8,6 +8,7 @@ namespace Minigame
 {
     public class InputMinigame : MonoBehaviour
     {
+        public GameObject encounter;
         [SerializeField] private int minGold;
         [SerializeField] private int maxGold;
         [SerializeField] private int minResources;
@@ -21,7 +22,7 @@ namespace Minigame
 
         [SerializeField] private int minInputs;
         [SerializeField] private int maxInputs;
-        private const string InputOptions = "abcdefghijklmnopqrstuvwxyz";
+        private const string InputOptions = "abcdfghijkmnoprstuvwxyz";
 
         private List<GameObject> _inputs;
         private float _remainingTimeLimit;
@@ -43,30 +44,24 @@ namespace Minigame
 
         private void Update()
         {
-            if (gameFinished)
-            {
-                _roverMovement.enabled = true;
-                return;
-            }
-            else
-            {
-                _roverMovement.enabled = false; 
-            }
-            
-            
+            if (gameFinished) return;
             if (_inputs.Count == 0)
             {
                 gameFinished = true;
                 _playerResources.AddGold(Random.Range(minGold, maxGold));
                 _playerResources.AddResource(Random.Range(minResources, maxResources));
                 passText.SetActive(true);
+                Destroy(encounter);
                 Destroy(gameObject, 2f);
+                _roverMovement.enabled = true;
                 return;
             }
             if (_remainingTimeLimit <= 0)
             {
                 failText.SetActive(true);
+                Destroy(encounter);
                 Destroy(gameObject, 2f);
+                _roverMovement.enabled = true;
                 return;
             }
             
@@ -82,6 +77,7 @@ namespace Minigame
 
         private void RunTimer()
         {
+            _roverMovement.enabled = false; 
             _remainingTimeLimit -= Time.deltaTime;
             timer.fillAmount = _remainingTimeLimit / timeLimit;
         }

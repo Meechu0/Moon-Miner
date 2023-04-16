@@ -8801,7 +8801,7 @@ GameObject:
   - component: {fileID: 1091958835}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9431,9 +9431,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091958829}
-        m_TargetAssemblyTypeName: BaseInteraction, Assembly-CSharp
-        m_MethodName: FinishGame
+      - m_Target: {fileID: 543450653167790065}
+        m_TargetAssemblyTypeName: ReturnPointInteraction, Assembly-CSharp
+        m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16903,6 +16903,7 @@ MonoBehaviour:
   - {fileID: 1133237919}
   - {fileID: 863515066}
   playerPosition: {fileID: 1091958823}
+  _BaseInteractionScript: {fileID: 1091958829}
 --- !u!65 &543450653167790068
 BoxCollider:
   m_ObjectHideFlags: 0

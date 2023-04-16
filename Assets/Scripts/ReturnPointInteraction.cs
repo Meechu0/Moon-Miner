@@ -33,6 +33,7 @@ public class ReturnPointInteraction : MonoBehaviour
         return true;
     }
 
+    public BaseInteraction _BaseInteractionScript;
     public void Interact()
     {
         allSatellitesPowered = CheckSatellitesPower();
@@ -40,6 +41,7 @@ public class ReturnPointInteraction : MonoBehaviour
         if (allSatellitesPowered)
         {
             Debug.Log("Satellites powered, returning to Earth");
+            _BaseInteractionScript.FinishGame();
         }
         else
         {

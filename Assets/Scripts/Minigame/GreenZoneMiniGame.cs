@@ -27,9 +27,11 @@ namespace Minigame
         private float _currentVel;
         private bool _stop;
         private bool _gameFinished;
+        private RoverMovement _roverMovement;
 
         private void Awake()
         {
+            _roverMovement = FindObjectOfType<RoverMovement>();
             _playerResources = FindObjectOfType<PlayerResources>();
             _redBar = GetComponent<RectTransform>();
             _redRange = _redBar.rect.size.y / 2f;
@@ -42,15 +44,26 @@ namespace Minigame
 
         private void Update()
         {
+            
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) _stop = true;
-        
-            if(!_stop) MoveArrow();
+
+            if (!_stop)
+            {
+                MoveArrow();
+                _roverMovement.enabled = false;
+            }
+            else
+            {
+                _roverMovement.enabled = true;
+            }
+            
             if (_stop && !_gameFinished)
             {
                 _gameFinished = true;
                 var pass = PassFail();
                 if(pass) Instantiate(successText, transform);
                 else Instantiate(failText, transform);
+
                 Destroy(gameObject, 2f);
             }
         }

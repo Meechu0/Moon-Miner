@@ -22,6 +22,8 @@ public class ShopManager : MonoBehaviour
             BatteryUpgradesAvailable -= 1;
             Debug.Log("upgrade complete");
             batteryStockText.text = "Available: " + BatteryUpgradesAvailable;
+            _RoverMovementScript.numberOfBatteries = _RoverMovementScript.maxNumberOfBatteries;
+            _RoverMovementScript.BatteryCountText.text = _RoverMovementScript.numberOfBatteries.ToString();
 
         }
         else

@@ -15,5 +15,10 @@ public class Charger : MonoBehaviour
             Debug.Log(other.name);
             other.GetComponent<SateliteInteraction>().Interact();
         }
+
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<RoverMovement>().FillBattery();
+        }
     }
 }

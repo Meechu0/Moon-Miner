@@ -43,12 +43,12 @@ public class RoverMovement : MonoBehaviour
     {
         
         //refill battery (for testing)
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            FillBattery();
-            numberOfBatteries += 1;
-            BatteryCountText.text = numberOfBatteries.ToString();
-        }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     FillBattery();
+        //     numberOfBatteries += 1;
+        //     BatteryCountText.text = numberOfBatteries.ToString();
+        // }
 
         if (batteryCharge > 0)
         {
@@ -144,7 +144,7 @@ public class RoverMovement : MonoBehaviour
         }
     }
 
-    private void FillBattery()
+    public void FillBattery()
     {
         batteryCharge = 10f;
         isMoving = true;

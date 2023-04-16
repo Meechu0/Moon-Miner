@@ -31,6 +31,8 @@ public class RoverMovement : MonoBehaviour
     private SateliteInteraction _sateliteScript;
     //return interaction point
     public ReturnPointInteraction _returnPoint;
+
+    [SerializeField] private GameObject gameOverPanel;
     private void Start()
     {
         numberOfBatteries = maxNumberOfBatteries;
@@ -41,7 +43,10 @@ public class RoverMovement : MonoBehaviour
     private Image batteryFillImage; // battery charge ui image
     void Update()
     {
-        
+        if (gameOverPanel.activeSelf)
+        {
+            return;
+        }
         //refill battery (for testing)
         // if (Input.GetKeyDown(KeyCode.Q))
         // {
@@ -53,6 +58,10 @@ public class RoverMovement : MonoBehaviour
         if (batteryCharge > 0)
         {
             processInputs();
+        }
+        else if (batteryCharge <= 0 && numberOfBatteries <= 0)
+        {
+            gameOverPanel.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.E))

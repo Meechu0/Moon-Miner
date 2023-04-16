@@ -14,6 +14,7 @@ public class BaseInteraction : MonoBehaviour
     public GameObject tabPanel;
     public GameObject shopPanel;
     public GameObject rocketPanel;
+    public GameObject GGPanel;
     [FormerlySerializedAs("gold")] public int copper;
     public int resources;
     private bool isCollidingWithBase; 
@@ -140,6 +141,30 @@ public class BaseInteraction : MonoBehaviour
             uiPanel.SetActive(false);
         }
 
+    }
+
+    public void FinishGame()
+    {
+        if (AreAllSatellitesPowered() == true)
+        {
+            GGPanel.SetActive(true);
+        }
+        else
+        {
+
+        }
+    }
+
+    public bool AreAllSatellitesPowered()
+    {
+        for (int i = 0; i < satelliteScripts.Length; i++)
+        {
+            if (!satelliteScripts[i].isPowered)
+            {
+                return false; 
+            }
+        }
+        return true;
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HelpMenu : MonoBehaviour
 {
@@ -29,5 +30,11 @@ public class HelpMenu : MonoBehaviour
     public void TurnOOnHelpPanel()
     {
         helpPanel.SetActive(true);
+    }
+
+    public void loadMainMenu()
+    {
+            SceneManager.LoadScene("MainMenu"); 
+
     }
 }

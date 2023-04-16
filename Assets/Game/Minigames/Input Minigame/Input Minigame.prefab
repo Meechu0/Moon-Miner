@@ -486,7 +486,7 @@ MonoBehaviour:
   minGold: 0
   maxGold: 0
   minResources: 10
-  maxResources: 25
+  maxResources: 15
   timeLimit: 10
   timer: {fileID: 2930348628371674626}
   inputPrefab: {fileID: 8198633837174627178, guid: 1176c65d5b981bb439f2cf41a1befe34, type: 3}

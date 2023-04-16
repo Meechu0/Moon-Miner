@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ChargerPlacer : MonoBehaviour
 {
+    [SerializeField] public int availableChargers;
     [SerializeField] private Transform mainBase;
     [SerializeField] private float chargerMaxLength;
     [SerializeField] private GameObject chargerPrefab;
@@ -31,12 +32,12 @@ public class ChargerPlacer : MonoBehaviour
         float dist = Mathf.Infinity;
         Transform closestCharger = null;
         
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && availableChargers > 0)
         {
             _placeCharger = !_placeCharger;
         }
         
-        if (_placeCharger)
+        if (_placeCharger && availableChargers > 0)
         {
             if (_placeholderCharger == null)
             {

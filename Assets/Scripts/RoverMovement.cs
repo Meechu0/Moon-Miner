@@ -75,23 +75,23 @@ public class RoverMovement : MonoBehaviour
             gameOverPanel.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if(_sateliteScript != null && Vector3.Distance(transform.position, _sateliteScript.transform.position) < 15f)
-            {
-                _sateliteScript.Interact();
-                Debug.Log("interacted with satelite");
-            }
-            else
-            {
-                //Debug.Log("interaction failed");
-            }
-            if (_returnPoint != null && Vector3.Distance(transform.position, _returnPoint.transform.position) < 15f)
-            {
-                _returnPoint.Interact();
-               // Debug.Log("interacted with return point");
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     if(_sateliteScript != null && Vector3.Distance(transform.position, _sateliteScript.transform.position) < 15f)
+        //     {
+        //         _sateliteScript.Interact();
+        //         Debug.Log("interacted with satelite");
+        //     }
+        //     else
+        //     {
+        //         //Debug.Log("interaction failed");
+        //     }
+        //     if (_returnPoint != null && Vector3.Distance(transform.position, _returnPoint.transform.position) < 15f)
+        //     {
+        //         _returnPoint.Interact();
+        //        // Debug.Log("interacted with return point");
+        //     }
+        // }
     }
 
     private void processInputs()

@@ -27,9 +27,11 @@ namespace Minigame
         private float _remainingTimeLimit;
         private PlayerResources _playerResources;
         private bool gameFinished;
+        private RoverMovement _roverMovement;
 
         private void Awake()
         {
+            _roverMovement = FindObjectOfType<RoverMovement>();
             _playerResources = FindObjectOfType<PlayerResources>();
             _remainingTimeLimit = timeLimit;
         }
@@ -41,7 +43,17 @@ namespace Minigame
 
         private void Update()
         {
-            if (gameFinished) return;
+            if (gameFinished)
+            {
+                _roverMovement.enabled = true;
+                return;
+            }
+            else
+            {
+                _roverMovement.enabled = false; 
+            }
+            
+            
             if (_inputs.Count == 0)
             {
                 gameFinished = true;

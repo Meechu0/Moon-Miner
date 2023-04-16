@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Base
   - Satelite
+  - Rocket
   layers:
   - Default
   - TransparentFX

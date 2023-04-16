@@ -1,25 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ReturnPointInteraction : MonoBehaviour
 {
-    public GameObject[] satelites;
-    private bool allSatelitesPowered;
-    // Start is called before the first frame update
+    public GameObject textPrefab;
+    public float textFadeDuration;
+    private GameObject currentTextPrefab;
+    public GameObject[] satellites;
+    private bool allSatellitesPowered;
+    public GameObject playerPosition; 
+    private bool isTextFading; 
+
     void Start()
     {
-        for (int i = 0; i < satelites.Length; i++)
+        for (int i = 0; i < satellites.Length; i++)
         {
-            satelites[i].GetComponent<SateliteInteraction>().isPowered = false;
+            satellites[i].GetComponent<SateliteInteraction>().isPowered = false;
         }
     }
 
-    public bool checkSatelitesPower()
+    public bool CheckSatellitesPower()
     {
-        for(int i = 0; i < satelites.Length; i++)
+        for (int i = 0; i < satellites.Length; i++)
         {
-            if (!satelites[i].GetComponent<SateliteInteraction>().isPowered)
+            if (!satellites[i].GetComponent<SateliteInteraction>().isPowered)
             {
                 return false;
             }
@@ -29,20 +35,73 @@ public class ReturnPointInteraction : MonoBehaviour
 
     public void Interact()
     {
-        allSatelitesPowered = checkSatelitesPower();
+        allSatellitesPowered = CheckSatellitesPower();
 
-        if (allSatelitesPowered)
+        if (allSatellitesPowered)
         {
-            Debug.Log("Satelites powered, returning to earth");
-        }else
+            Debug.Log("Satellites powered, returning to Earth");
+        }
+        else
         {
-            Debug.Log("not all satelites powered, keep exploring");
+            if (currentTextPrefab != null && isTextFading)
+            {
+                return;
+            }
+
+            if (currentTextPrefab != null)
+            {
+                StopCoroutine(FadeOutText());
+                Destroy(currentTextPrefab);
+            }
+
+            if (textPrefab != null && playerPosition != null)
+            {
+                Vector3 positionAbovePlayer = playerPosition.transform.position;
+                positionAbovePlayer.y = positionAbovePlayer.y + 2.0f; 
+                Quaternion playerRotation = Quaternion.Euler(0.0f, Camera.main.transform.rotation.eulerAngles.y, 0.0f);
+                currentTextPrefab = Instantiate(textPrefab, positionAbovePlayer, playerRotation);
+            }
+
+            if (currentTextPrefab != null)
+            {
+                TextMeshPro textMesh = currentTextPrefab.GetComponent<TextMeshPro>();
+                textMesh.text = " Connect all satelites!";
+                textMesh.alpha = 1.0f;
+
+                StartCoroutine(FadeOutText());
+            }
+            
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator FadeOutText()
     {
-        
+        if (currentTextPrefab != null)
+        {
+            isTextFading = true; // Set the flag to true indicating text is fading
+            TextMeshPro textMesh = currentTextPrefab.GetComponent<TextMeshPro>();
+            float alpha = 1.0f;
+
+            // Gradually decrease the alpha value to fade out the text
+            while (alpha > 0.0f)
+            {
+                alpha -= Time.deltaTime / textFadeDuration;
+                textMesh.alpha = alpha;
+                yield return null;
+            }
+
+            // Set the alpha value to 0 to ensure it's fully transparent
+            textMesh.alpha = 0.0f;
+
+            // Wait for the next frame to ensure the text is fully transparent before destroying the object
+            yield return new WaitForEndOfFrame();
+
+            if (currentTextPrefab != null)
+            {
+                Destroy(currentTextPrefab);
+                currentTextPrefab = null;
+
+            }
+        }
     }
 }

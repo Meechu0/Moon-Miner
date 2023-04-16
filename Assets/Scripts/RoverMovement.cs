@@ -57,7 +57,7 @@ public class RoverMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(_sateliteScript != null && Vector3.Distance(transform.position, _sateliteScript.transform.position) < 20F)
+            if(_sateliteScript != null && Vector3.Distance(transform.position, _sateliteScript.transform.position) < 15f)
             {
                 _sateliteScript.Interact();
                 Debug.Log("interacted with satelite");
@@ -66,11 +66,10 @@ public class RoverMovement : MonoBehaviour
             {
                 //Debug.Log("interaction failed");
             }
-
-            if (_returnPoint != null && Vector3.Distance(transform.position, _returnPoint.transform.position) < 20f)
+            if (_returnPoint != null && Vector3.Distance(transform.position, _returnPoint.transform.position) < 15f)
             {
                 _returnPoint.Interact();
-                Debug.Log("interacted with return point");
+               // Debug.Log("interacted with return point");
             }
         }
     }

@@ -7,11 +7,13 @@ using UnityEngine.Serialization;
 
 public class BaseInteraction : MonoBehaviour
 {
+    public ReturnPointInteraction _ReturnPointInteraction;
     public PlayerResources _PlayerResources;
     public RoverMovement _RoverMovementScript;
     public GameObject uiPanel;
     public GameObject tabPanel;
     public GameObject shopPanel;
+    public GameObject rocketPanel;
     [FormerlySerializedAs("gold")] public int copper;
     public int resources;
     private bool isCollidingWithBase; 
@@ -41,9 +43,32 @@ public class BaseInteraction : MonoBehaviour
             }
         }
     }
+
+
+    public Image[] satelliteImages;
+    public SateliteInteraction[] satelliteScripts;
+
+    void UpdateSatelliteImage(SateliteInteraction sateliteScript, Image sateliteImage)
+    {
+        if (sateliteScript.isPowered)
+        {
+            // Set the image color to green if the satellite is powered
+            sateliteImage.color = Color.green;
+        }
+        else
+        {
+            // Set the image color to red if the satellite is not powered
+            sateliteImage.color = Color.red;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        
+        // Update satellite images based on their corresponding scripts
+        for (int i = 0; i < satelliteScripts.Length; i++)
+        {
+            UpdateSatelliteImage(satelliteScripts[i], satelliteImages[i]);
+        }
+
         if (other.CompareTag("Base"))
         {
             TransferResourcesToBase();
@@ -51,9 +76,12 @@ public class BaseInteraction : MonoBehaviour
             isCollidingWithBase = true;
             _RoverMovementScript.numberOfBatteries = _RoverMovementScript.maxNumberOfBatteries;
             _RoverMovementScript.batteryCharge = 10f;
-
-
-
+        }
+        if (other.CompareTag("Rocket"))
+        {
+                
+            rocketPanel.SetActive(true);
+            Debug.Log("InRocketRange");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -73,10 +101,15 @@ public class BaseInteraction : MonoBehaviour
             {
                 shopPanel.SetActive(false);
             }
+        }
 
-
+        if (other.CompareTag("Rocket"))
+        {
+            rocketPanel.SetActive(false);
         }
     }
+
+
 
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI resourcesText;

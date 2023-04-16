@@ -237,7 +237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 278.59998, y: -28}
+  m_AnchoredPosition: {x: 280.19998, y: -99.600006}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &11439576
@@ -1455,7 +1455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 107, y: -109.4}
+  m_AnchoredPosition: {x: 111.200005, y: -109.600006}
   m_SizeDelta: {x: 120.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117685036
@@ -3106,11 +3106,10 @@ MonoBehaviour:
     Press the "R" key to return to your base and recharge
     your battery.
 
-    Press the "U" key to open the upgrade shop and buy extra
-    batteries and wires using lithium and copper ores.
+    Press the "U" key to open the upgrade shop and buy extra batteries
+    and wires using lithium and copper ores.
 
-    Play mini-games to mine
-    ores.'
+    Play mini-games to mine ores.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12321,7 +12320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1720668838
 RectTransform:
   m_ObjectHideFlags: 0

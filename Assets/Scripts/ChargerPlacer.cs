@@ -78,6 +78,7 @@ public class ChargerPlacer : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0) && closestCharger != null)
                 {
+                    availableChargers--;
                     _placeholderCharger.GetComponent<Charger>().connected = true;
                     _placeholderCharger.GetComponent<Renderer>().sharedMaterial = _defaultMat;
                     _chargers.Add(_placeholderCharger.transform);

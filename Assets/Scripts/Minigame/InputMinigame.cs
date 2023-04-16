@@ -77,6 +77,7 @@ namespace Minigame
 
         private void RunTimer()
         {
+            _inputs[0].GetComponent<RawImage>().color = Color.green;
             _roverMovement.enabled = false; 
             _remainingTimeLimit -= Time.deltaTime;
             timer.fillAmount = _remainingTimeLimit / timeLimit;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ChargerPlacer : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class ChargerPlacer : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Material inRangeMat;
     [SerializeField] private Material outOfRangeMat;
+
+    [SerializeField] public TextMeshProUGUI chargerCountText;
+
 
     private Material _defaultMat;
     private bool _placeCharger;
@@ -84,6 +88,7 @@ public class ChargerPlacer : MonoBehaviour
                     _chargers.Add(_placeholderCharger.transform);
                     _placeholderCharger = null;
                     _placeCharger = false;
+                    chargerCountText.text = availableChargers.ToString();
                 }
             }
         }
@@ -97,5 +102,6 @@ public class ChargerPlacer : MonoBehaviour
     public void BuyCharger()
     {
         availableChargers++;
+        chargerCountText.text = "Wires: " +availableChargers.ToString();
     }
 }

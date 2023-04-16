@@ -12,6 +12,8 @@ public class PlayerResources : MonoBehaviour
     public int resource;
     public TextMeshPro goldTextPrefab;
     public TextMeshPro resourceTextPrefab;
+
+    public TextMeshProUGUI wiresText;
     void Start()
     {
 

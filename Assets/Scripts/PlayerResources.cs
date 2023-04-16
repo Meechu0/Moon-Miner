@@ -24,7 +24,7 @@ public class PlayerResources : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
-        GoldText.text = "gold: " +gold.ToString();
+        GoldText.text = "Copper: " + gold.ToString();
         // spawn text object above players head
         if (goldTextPrefab != null)
         {
@@ -34,7 +34,7 @@ public class PlayerResources : MonoBehaviour
             // spawn text object
             TextMeshPro text = Instantiate(goldTextPrefab, textPosition, textRotation);
             // replace text with amount recieved
-            text.text = "+" + amount + " Gold"; 
+            text.text = "+" + amount + " Copper"; 
             // start fade anim
             StartCoroutine(MoveAndFadeText(text));
         }
@@ -44,7 +44,7 @@ public class PlayerResources : MonoBehaviour
     public void AddResource(int amount)
     {
         resource += amount;
-        resourceText.text = "Resource: " + gold.ToString();
+        resourceText.text = "Lithium: " + resource.ToString();
         // spawn text object above players head
         if (goldTextPrefab != null)
         {
@@ -54,7 +54,7 @@ public class PlayerResources : MonoBehaviour
             // spawn text object
             TextMeshPro text = Instantiate(resourceTextPrefab, textPosition, textRotation);
             // replace text with amount recieved
-            text.text = "+" + amount + " Resource";
+            text.text = "+" + amount + " Lithium";
             // start fade anim
             StartCoroutine(MoveAndFadeText(text));
         }
@@ -89,8 +89,8 @@ public class PlayerResources : MonoBehaviour
     {
         gold = 0;
         resource = 0;
-        resourceText.text = "Resource: " + gold.ToString();
-        GoldText.text = "gold: " + gold.ToString();
+        resourceText.text = "Lithium: " + resource.ToString();
+        GoldText.text = "Copper: " + gold.ToString();
 
     }
 }

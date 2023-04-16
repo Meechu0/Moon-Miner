@@ -42,13 +42,15 @@ public class BaseInteraction : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        TransferResourcesToBase();
+        
         if (other.CompareTag("Base"))
         {
+            TransferResourcesToBase();
             Debug.Log("entered base");
             isCollidingWithBase = true;
             _RoverMovementScript.numberOfBatteries = _RoverMovementScript.maxNumberOfBatteries;
             _RoverMovementScript.batteryCharge = 10f;
+
 
 
         }

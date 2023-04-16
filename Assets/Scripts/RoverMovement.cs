@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using TMPro;
 
 public class RoverMovement : MonoBehaviour
 {
+    [SerializeField] private float engineMovingVolume;
+    [SerializeField] private float engineIdleVolume;
     [SerializeField] 
     private LayerMask ground;
     [SerializeField]
@@ -33,6 +36,14 @@ public class RoverMovement : MonoBehaviour
     public ReturnPointInteraction _returnPoint;
 
     [SerializeField] private GameObject gameOverPanel;
+
+    private AudioSource _audioSource;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void Start()
     {
         numberOfBatteries = maxNumberOfBatteries;
@@ -91,10 +102,12 @@ public class RoverMovement : MonoBehaviour
         if (verticalInput > 0)
         {
             isMoving = true;
+            _audioSource.volume = engineMovingVolume;
         }
         else
         {
             isMoving = false;
+            _audioSource.volume = engineIdleVolume;
         }
 
         bool isBoosting = Input.GetKey(KeyCode.LeftShift);

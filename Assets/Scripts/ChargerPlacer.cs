@@ -92,4 +92,9 @@ public class ChargerPlacer : MonoBehaviour
             Destroy(_placeholderCharger);
         }
     }
+
+    public void BuyCharger()
+    {
+        availableChargers++;
+    }
 }

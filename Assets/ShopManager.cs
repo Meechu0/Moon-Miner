@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,17 +7,25 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
+    public int chargerCost;
+    
     public int BatteryUpgradesAvailable = 2;
     public int BatteryUpgradeCost;
     public RoverMovement _RoverMovementScript;
     public BaseInteraction _BaseInteractionScript;
     public TextMeshProUGUI batteryStockText;
+    private ChargerPlacer chargerPlacer;
+
+    private void Awake()
+    {
+        chargerPlacer = FindObjectOfType<ChargerPlacer>();
+    }
 
     public void BatteryUpgrade()
     {
-        if (_BaseInteractionScript.gold >= BatteryUpgradeCost && BatteryUpgradesAvailable > 0)
+        if (_BaseInteractionScript.copper >= BatteryUpgradeCost && BatteryUpgradesAvailable > 0)
         {
-            _BaseInteractionScript.gold -= BatteryUpgradeCost;
+            _BaseInteractionScript.copper -= BatteryUpgradeCost;
             _BaseInteractionScript.updateText();
             _RoverMovementScript.maxNumberOfBatteries += 1;
             BatteryUpgradesAvailable -= 1;
@@ -29,6 +38,16 @@ public class ShopManager : MonoBehaviour
         else
         {
             Debug.Log("cant upgrade");
+        }
+    }
+
+    public void BuyCharger()
+    {
+        if (_BaseInteractionScript.copper >= chargerCost)
+        {
+            chargerPlacer.BuyCharger();
+            _BaseInteractionScript.copper -= BatteryUpgradeCost;
+            _BaseInteractionScript.updateText();
         }
     }
 }

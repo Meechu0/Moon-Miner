@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class BaseInteraction : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class BaseInteraction : MonoBehaviour
     public GameObject uiPanel;
     public GameObject tabPanel;
     public GameObject shopPanel;
-    public int gold;
+    [FormerlySerializedAs("gold")] public int copper;
     public int resources;
     private bool isCollidingWithBase; 
     // Update is called once per frame
@@ -81,7 +82,7 @@ public class BaseInteraction : MonoBehaviour
     public TextMeshProUGUI resourcesText;
     public void TransferResourcesToBase()
     {
-        gold += _PlayerResources.gold;
+        copper += _PlayerResources.gold;
         resources += _PlayerResources.resource;
         updateText();
         _PlayerResources.updateValuebles();
@@ -90,7 +91,7 @@ public class BaseInteraction : MonoBehaviour
     public void updateText()
     {
         resourcesText.text = "Resources: " + resources.ToString();
-        goldText.text = "Gold: " + gold.ToString();
+        goldText.text = "Gold: " + copper.ToString();
     }
 
     public void openShop()

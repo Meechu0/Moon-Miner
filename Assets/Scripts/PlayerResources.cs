@@ -23,6 +23,7 @@ public class PlayerResources : MonoBehaviour
     //add gold function 
     public void AddGold(int amount)
     {
+        if (amount == 0) return;
         gold += amount;
         GoldText.text = "Copper: " + gold.ToString();
         // spawn text object above players head
@@ -43,6 +44,7 @@ public class PlayerResources : MonoBehaviour
     // add resource function
     public void AddResource(int amount)
     {
+        if (amount == 0) return;
         resource += amount;
         resourceText.text = "Lithium: " + resource.ToString();
         // spawn text object above players head

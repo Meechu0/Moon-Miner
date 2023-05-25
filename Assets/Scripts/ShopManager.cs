@@ -28,9 +28,9 @@ public class ShopManager : MonoBehaviour
 
     public void BatteryUpgrade()
     {
-        if (_BaseInteractionScript.copper >= BatteryUpgradeCost && BatteryUpgradesAvailable > 0)
+        if (_BaseInteractionScript.resources >= BatteryUpgradeCost && BatteryUpgradesAvailable > 0)
         {
-            _BaseInteractionScript.copper -= BatteryUpgradeCost;
+            _BaseInteractionScript.resources -= BatteryUpgradeCost;
             _BaseInteractionScript.updateText();
             _RoverMovementScript.maxNumberOfBatteries += 1;
             BatteryUpgradesAvailable -= 1;
